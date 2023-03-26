@@ -1,0 +1,7 @@
+USER=example_user
+HOST=0.0.0.0
+PASSWORD="password"
+DOMAINS=("website1.com" "website2.com")
+declare -A DATABASES
+DATABASES["website1.com"]="db1"
+DATABASES["website2.com"]="db2"
