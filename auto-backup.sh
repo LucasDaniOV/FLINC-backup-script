@@ -1,12 +1,14 @@
 #!/bin/bash
 
-source ./.config
+PROJECT=/home/private/Projects/FLINC/auto_backup
+source $PROJECT/.env
 
-echo "Starting backup at $(date +"%Y-%m-%d %H:%M:%S")" >> ./backup.log
+echo "Starting backup at $(date +"%Y-%m-%d %H:%M:%S")" >> $PROJECT/backup.log
 
 # check if host is reachable
 ping -c 1 -q $HOST || exit 1
 
+CURRENT_YEAR=$(date +"%Y")
 CURRENT_MONTH_NAME=$(date +"%B")
 
 for DOMAIN in ${DOMAINS[@]}; do
@@ -15,7 +17,7 @@ for DOMAIN in ${DOMAINS[@]}; do
     echo "Done creating dump file for database ${DATABASES[$DOMAIN]}"
 
     echo "Copying all files from remote dir to local dir for $DOMAIN"
-    BACKUP_DIR=/home/private/Projects/FLINC/backups/$DOMAIN/$CURRENT_MONTH_NAME
+    BACKUP_DIR=/home/private/Projects/FLINC/backups/$DOMAIN/$CURRENT_YEAR/$CURRENT_MONTH_NAME
     mkdir -p $BACKUP_DIR
 
     # rsync -azP --delete $USER@$HOST:/home/$USER/domains/$DOMAIN $BACKUP_DIR && echo "Backup completed for $DOMAIN"
