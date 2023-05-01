@@ -1,0 +1,9 @@
+[Unit]
+Description=Backup FLINC and FLINC-EV websites and databases
+
+[Service]
+Type=oneshot
+ExecStart=/home/private/Projects/FLINC/auto_backup/auto-backup.sh
+
+[Install]
+WantedBy=multi-user.target
